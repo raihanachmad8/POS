@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home.index');
 });
+
+Route::prefix('product')->group(function () {
+    Route::get('/', [ProductController::class, 'index'] )->name('product');
+    Route::get('/{id}', [ProductController::class, 'show'] )->name('product.show');
+    Route::prefix('category')->group(function () {
+        Route::get("/food-beverage", [ProductController::class, 'filterByCategoryFood']);
+        Route::get("/beauty-health", [ProductController::class, 'filterByCategoryBeauty']);
+        Route::get("/home-care", [ProductController::class, 'filterByCategoryHomeCare']);
+        Route::get("/baby-kid", [ProductController::class, 'filterByCategoryBabyKid']);
+        Route::get('/{id}', [ProductController::class, 'filterByCategory'] )->name('product.category');
+    });
+});
+
+Route::get('/user/{id}/name/{name}', [ProfileController::class, 'index' ])->name('profile');
