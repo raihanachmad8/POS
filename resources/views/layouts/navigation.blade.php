@@ -78,7 +78,7 @@
                 'id' => '1', 'name' => 'raihan'
             ]) }}" draggable="false" class="inline-flex flex-col items-center justify-center">
                 <i class="fa-solid fa-user"></i>
-                <span>Product</span>
+                <span>Profile</span>
             </a>
         </div>
 
